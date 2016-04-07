@@ -27,13 +27,13 @@ result = urllib2.urlopen(requst).read()
 html_obj = lxml.html.fromstring(result)
  
 # 下载热曲前，先将之前的清空
-# if os.path.exists("top10"):
-#     shutil.rmtree("top10")
+if os.path.exists("top10"):
+    shutil.rmtree("top10")
  
 song_href = html_obj.xpath('tr//strong/a/@href')
 for l in song_href[0:int(config_dic.get("top"))]:
     song_id = l.split('/')[2]
-    #os.system("python xiami.py -s " + song_id)
+    os.system("python xiami.py -s " + song_id)
 
 print("下载结束，共下载%s首歌曲" % config_dic.get("top"))
 
@@ -45,8 +45,9 @@ for file in os.listdir("top10"):
         mp3_list.append(file)
 a = os.getcwd() + os.path.sep+"top10"+os.path.sep+mp3_list[0].decode("gbk")
 print(a)
-print("当前播放列表有%s"%mp3_list)
+print("当前播放列表有%s"%a)
 pygame.mixer.init()
 # 循环播放
-track2=pygame.mixer.Sound(a)
-track2.play()
+track = pygame.mixer.music.load(a)
+pygame.mixer.music.set_volume(0.8)
+pygame.mixer.music.play()
