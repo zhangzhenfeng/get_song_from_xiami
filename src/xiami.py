@@ -254,7 +254,8 @@ class XiamiDownloader:
     def format_folder(self, wrap, song):
         return os.path.join(
             wrap.decode(default_encoding),
-            sanitize_filename(song.album_name)
+            #sanitize_filename(song.album_name)
+            "top10"
         )
 
     def download(self, url, filename):
@@ -402,7 +403,7 @@ def add_id3_tag(filename, song, no_lrc_timetag):
             data=image
         ))
 
-    println(musicfile.pprint())
+    #println(musicfile.pprint())
 
     # Note:
     # mutagen only write id3v2 with v2.4 spec,
