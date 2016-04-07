@@ -1,9 +1,9 @@
 #!/usr/bin/env python2 
 # coding:utf-8
 
-import urllib2,os
+import urllib2,os,sys
 import lxml.html,shutil
-import pygame
+import pygame,time,Queue
 
 # 获取配置文件内的配置信息
 config = ""
@@ -38,16 +38,32 @@ for l in song_href[0:int(config_dic.get("top"))]:
 print("下载结束，共下载%s首歌曲" % config_dic.get("top"))
 
 # 找到音乐目录的所有文件，进行顺序播放
-mp3_list = []
+mp3_list = Queue.Queue(maxsize = 10)
+#mp3_list = []
 for file in os.listdir("top10"):
     print(file.decode("gbk"))
     if os.path.isfile("top10"+os.path.sep+file.decode("gbk")):
-        mp3_list.append(file)
-a = os.getcwd() + os.path.sep+"top10"+os.path.sep+mp3_list[0].decode("gbk")
-print(a)
+        mp3_list.put(os.getcwd() + os.path.sep+"top10"+os.path.sep+file)
+        #mp3_list.append(file)
+#a = os.getcwd() + os.path.sep+"top10"+os.path.sep+mp3_list[0].decode("gbk")
+#print(a)
 #print("当前播放列表有%s"%a)
+pygame.init()
 pygame.mixer.init()
+pygame.time.delay(1000)
+screen=pygame.display.set_mode([640,480])
+
 # 循环播放
-track = pygame.mixer.music.load(a)
+pygame.mixer.music.load(mp3_list.get())
 pygame.mixer.music.set_volume(0.8)
 pygame.mixer.music.play()
+print(111111111111111111111111111111)
+while 1:
+    for event in pygame.event.get():
+        print(event.type)
+        if event.type==pygame.QUIT and mp3_list.empty() == False:
+            print(2222222222222222222222222)
+            pygame.mixer.music.load(mp3_list.get())
+            pygame.mixer.music.play()
+            #sys.exit()
+            

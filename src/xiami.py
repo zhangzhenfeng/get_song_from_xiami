@@ -249,7 +249,7 @@ class XiamiDownloader:
 #             title=song.title,
 #             artist=song.artist,
 #         ))
-        filename = 'song.title'
+        filename = song.title
         print('===============================')
         print(u'{:02d}'.format(song.track))
         print(song.title)
