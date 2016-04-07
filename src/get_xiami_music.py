@@ -45,7 +45,7 @@ for file in os.listdir("top10"):
         mp3_list.append(file)
 a = os.getcwd() + os.path.sep+"top10"+os.path.sep+mp3_list[0].decode("gbk")
 print(a)
-print("当前播放列表有%s"%a)
+#print("当前播放列表有%s"%a)
 pygame.mixer.init()
 # 循环播放
 track = pygame.mixer.music.load(a)
