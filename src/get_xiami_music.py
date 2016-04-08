@@ -41,7 +41,6 @@ print("下载结束，共下载[%s]首歌曲" % config_dic.get("top"))
 mp3_list = Queue.Queue(maxsize = 10)
 # 查询文件夹中所有的音乐文件。
 for file in os.listdir("top10"):
-    print(file.decode("gbk"))
     if os.path.isfile("top10"+os.path.sep+file.decode("gbk")):
         mp3_list.put(os.getcwd() + os.path.sep+"top10"+os.path.sep+file)
 # 初始化播放器
@@ -63,8 +62,8 @@ while True:
         print('当前播放列表还有[%s]首音乐。' % mp3_list.qsize())
         next_song = mp3_list.get()
         print('即将播放下一首曲目[%s]' % next_song)
-        pygame.mixer.music.queue(next_song)
-        #pygame.mixer.music.load(next_song)
+        #pygame.mixer.music.queue(next_song)
+        pygame.mixer.music.load(next_song)
         pygame.mixer.music.play()
 #     if mp3_list.empty():
 #         # 音乐都播放完成后退出
