@@ -244,16 +244,16 @@ class XiamiDownloader:
 
     def format_filename(self, song):
         template = unicode(self.name_template)
-#         filename = sanitize_filename(template.format(
-#             id=u'{:02d}'.format(song.track),
-#             title=song.title,
-#             artist=song.artist,
-#         ))
-        filename = song.title
-        print('===============================')
-        print(u'{:02d}'.format(song.track))
-        print(song.title)
-        print(song.title)
+        filename = sanitize_filename(template.format(
+            id=u'{:02d}'.format(song.track),
+            title=song.title,
+            artist=song.artist,
+        ))
+#         filename = song.title
+#         print('===============================')
+#         print(u'{:02d}'.format(song.track))
+#         print(song.title)
+#         print(song.title)
         return u'{}.mp3'.format(filename)
 
     def format_folder(self, wrap, song):
