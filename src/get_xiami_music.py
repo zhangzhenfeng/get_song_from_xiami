@@ -52,20 +52,20 @@ pygame.mixer.music.set_endevent(pygame.USEREVENT + 1)
 
 # 循环播放
 pygame.mixer.music.load(mp3_list.get())
-pygame.mixer.music.set_volume(0.4)
+pygame.mixer.music.set_volume(0.6)
 pygame.mixer.music.play()
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 
             running = False
+            sys.exit()
     if not pygame.mixer.music.get_busy() and not mp3_list.empty():
         print('当前播放列表还有[%s]首音乐。' % mp3_list.qsize())
         next_song = mp3_list.get()
         print('即将播放下一首曲目[%s]' % next_song)
-        #pygame.mixer.music.queue(next_song)
+        pygame.mixer.music.queue(next_song)
         pygame.mixer.music.load(next_song)
         pygame.mixer.music.play()
-#     if mp3_list.empty():
-#         # 音乐都播放完成后退出
-#         sys.exit()
+    else:
+        sys.exit()
             
